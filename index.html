@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0c1424">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script>try{var t=localStorage.getItem("sp_theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+    <title>StudentPoint | Management System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">SP</div>
+
+            <div>
+                <h2>StudentPoint</h2>
+                <span>Management System</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <button class="nav-item active" onclick="showPage('dashboard', this)">
+                <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>
+                Dashboard
+            </button>
+
+            <button class="nav-item" onclick="showPage('scanner', this)">
+                <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 7v10"/><path d="M12 7v10"/><path d="M16 7v10"/></svg></span>
+                Scan Student ID
+            </button>
+
+            <button class="nav-item" onclick="showPage('students', this)">
+                <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                Students
+            </button>
+
+            <button class="nav-item" onclick="showPage('studentDetails', this)">
+                <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg></span>
+                Student Details
+            </button>
+
+            <button class="nav-item" onclick="showPage('activity', this)">
+                <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                Activity Log
+            </button>
+
+            <button class="nav-item" onclick="showPage('leaderboard', this)">
+                <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-1.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98 1.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span>
+                Leaderboard
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="admin-card">
+                <div class="admin-avatar">AD</div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <small>College Staff</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <p class="welcome">Welcome back, Administrator</p>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="top-actions">
+
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Switch night / bright mode" title="Night / Bright mode"><svg class="ico moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg><svg class="ico sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+
+                <button class="notification"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span></span>
+                </button>
+
+                <div class="profile">
+                    <div class="profile-avatar">AD</div>
+
+                    <div>
+                        <strong>Admin</strong>
+                        <small>Staff Account</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+        <section id="dashboard" class="page active-page">
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+
+                    <div>
+                        <span>Total Students</span>
+                        <strong id="totalStudents">0</strong>
+                        <small class="positive">Registered students</small>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></div>
+
+                    <div>
+                        <span>Points Awarded</span>
+                        <strong id="totalPoints">0</strong>
+                        <small class="positive">Positive activities</small>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></div>
+
+                    <div>
+                        <span>Penalty Points</span>
+                        <strong id="totalPenalty">0</strong>
+                        <small class="negative">Recorded penalties</small>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+
+                    <div>
+                        <span>Top Score</span>
+                        <strong id="topScore">0</strong>
+                        <small>StudentPoint Score</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Quick Student Scan</h2>
+                            <p>Scan a student ID to manage points</p>
+                        </div>
+
+                    </div>
+
+                    <div class="scan-box">
+
+                        <div class="scanner-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 7v10"/><path d="M12 7v10"/><path d="M16 7v10"/></svg></div>
+
+                        <h3>Ready to Scan</h3>
+
+                        <p>
+                            Hold the student's full college ID card in front of the camera
+                        </p>
+
+                        <button class="primary-btn" onclick="openScanner()">
+                            Scan Student ID
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Recent Activity</h2>
+                            <p>Latest student actions</p>
+                        </div>
+
+                        <button class="text-btn" onclick="showPageById('activity')">
+                            View all
+                        </button>
+
+                    </div>
+
+                    <div id="recentActivity" class="activity-list"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="scanner" class="page">
+
+            <div class="scanner-layout">
+
+                <div class="panel scanner-main">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h2>Student ID Scanner</h2>
+                            <p>Hold the full college ID card in front of the camera</p>
+                        </div>
+
+                        <div class="scanner-status">
+                            <span></span>
+                            Scanner Ready
+                        </div>
+
+                    </div>
+
+                    <div class="camera-area">
+
+                        <video id="scannerVideo" autoplay muted playsinline></video>
+
+                        <div class="camera-placeholder" id="cameraPlaceholder">
+                            <div class="camera-placeholder-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 7v10"/><path d="M12 7v10"/><path d="M16 7v10"/></svg></div>
+                            <strong>Camera Scanner</strong>
+                            <span>Press Start Scanner to activate camera</span>
+                        </div>
+
+                        <div class="scan-frame">
+
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+
+                            <div class="scan-line"></div>
+
+                        </div>
+
+                        <div class="scanner-message" id="scannerMessage">
+                            Camera is ready
+                        </div>
+
+                    </div>
+
+                    <div class="scanner-controls">
+
+                        <button id="startScanner" class="primary-btn" onclick="startScanner()">
+                            Start Scanner
+                        </button>
+
+                        <button class="secondary-btn" onclick="stopScanner()">
+                            Stop Scanner
+                        </button>
+
+                        <button class="primary-btn capture-btn" onclick="takePhoto()">
+                            Capture ID Card
+                        </button>
+
+                    </div>
+
+                    <div class="manual-scan">
+
+                        <label>Manual Student ID</label>
+
+                        <div class="input-group">
+
+                            <input
+                                type="text"
+                                id="studentIdInput"
+                                placeholder="Enter Student ID"
+                                onkeydown="handleManualKey(event)"
+                            >
+
+                            <button onclick="findStudent()">
+                                Search
+                            </button>
+
+                        </div>
+
+                        <small>
+                            Use manual entry if the card cannot be read.
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="panel student-result" id="studentResult">
+
+                    <div class="empty-result">
+
+                        <div class="empty-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+
+                        <h3>No Student Selected</h3>
+
+                        <p>
+                            Scan a student ID to view their profile.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="students" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Student Directory</h2>
+                    <p>Manage registered students</p>
+                </div>
+
+                <div class="heading-actions">
+                    <button class="secondary-btn" onclick="openImport()">Import Students</button>
+                    <button class="secondary-btn" onclick="exportRecords()">Download Records</button>
+                    <button class="primary-btn" onclick="openAddStudent()">+ Add Student</button>
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <div class="bulk-bar" id="bulkBar">
+                    <span id="bulkCount">0 selected</span>
+                    <button class="text-btn" onclick="clearSelection()">Clear</button>
+                    <button class="danger-btn" onclick="deleteSelected()">Delete Selected</button>
+                </div>
+
+                <div class="table-tools">
+
+                    <input
+                        type="text"
+                        id="studentSearch"
+                        placeholder="Search student..."
+                        onkeyup="searchStudents()"
+                    >
+
+                    <select id="departmentFilter" onchange="filterStudents()">
+                        <option value="all">All Departments</option>
+                        <option value="CSE">CSE</option>
+                        <option value="ECE">ECE</option>
+                        <option value="IT">IT</option>
+                        <option value="MECH">MECH</option>
+                    </select>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th class="check-col"><input type="checkbox" id="selectAllStudents" aria-label="Select all" onchange="toggleSelectAll(this.checked)"></th>
+                                <th>Student</th>
+                                <th>Register No.</th>
+                                <th>Department</th>
+                                <th>Points</th>
+                                <th>Penalty</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="studentDetails" class="page">
+
+            <div class="page-heading">
+                <div class="sd-title">
+                    <button class="back-btn" onclick="sdGoBack()" aria-label="Go back" title="Back"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+                    <div>
+                        <h2>Student Details</h2>
+                    <p>Choose a department and year, or search for any student</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sd-search">
+                <input type="text" id="sdSearch" placeholder="Search by name, register number or department..." oninput="renderStudentDetails()">
+            </div>
+
+            <div class="sd-crumb" id="sdCrumb"></div>
+
+            <div id="sdBody"></div>
+
+        </section>
+
+        <section id="activity" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Activity Log</h2>
+                    <p>Complete history of student activities</p>
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Action</th>
+                                <th>Points</th>
+                                <th>Staff</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="activityTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="leaderboard" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Student Leaderboard</h2>
+                    <p>Top performing students</p>
+                </div>
+
+            </div>
+
+            <div class="leaderboard" id="leaderboardList"></div>
+
+        </section>
+
+    </main>
+
+    <div class="modal-overlay" id="actionModal">
+
+        <div class="modal">
+
+            <button class="close-btn" onclick="closeModal()">×</button>
+
+            <div id="modalContent"></div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
